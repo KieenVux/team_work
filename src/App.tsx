@@ -34,7 +34,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Vite Documents avc
+            Vite Documents
           </a>
         </p>
       </header>
