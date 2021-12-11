@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
+import { route } from './route/route.map'
+import { useRoutes } from 'react-router-dom'
+import './App.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const elements = useRoutes(route)
   return (
     <div className="App">
-        <h1>Hello world</h1>
-        <h1>Hello world</h1>
-        <h1>Hello world</h1>
-        <h1>Hello world</h1>
+      <div className="auth-wrapper">
+        <div className="auth-inner">
+          {elements}
+        </div>
+      </div>
 
     </div>
   )
