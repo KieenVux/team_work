@@ -2,44 +2,55 @@ import { createContext, useContext, useState } from "react";
 import { useAxios } from "../hooks/useAxios";
 
 interface UserContext {
-    isAuthen: boolean;
-    login: (LoginReq: LoginReq) => void;
-    logout: () => void;
-    data: LoginReq
+    isAuthenticated: boolean;
+    login: (AccountReq: AccountReq) => Promise<void>;
+    logOut: () => void;
+    signUp: (AccountReq: AccountReq) => Promise<void>;
+    data: AccountReq
 }
 
-interface LoginReq {
-    id?: string;
-    email: string;
-    password?: string;
+interface AccountReq {
     name?: string;
+    email: string;
+    password: string;
+    role?: string;
+    message?: string
+    id?: string;
+    code?: string;
 }
+
+
 
 const UserContext = createContext<UserContext>(null!)
 
 export const UserProvider: React.FC = ({ children }) => {
-    const [isAuthen, setIsAuthen] = useState(false)
-    const { excute, data } = useAxios<LoginReq>();
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [status, setStatus] = useState(false)
+    const { execute, data } = useAxios<AccountReq>();
 
 
-    const login = async ({ email, password }: LoginReq) => {
+    const login = async ({ email, password }: AccountReq) => {
         if (email === 'Sincere@april.biz' && password === '123') {
-            await excute('get', 'users', '/1')
-            setIsAuthen(true);
+            await execute('get', 'users', '/1')
+            setIsAuthenticated(true);
         }
-        console.log("Data:", data);
-        console.log("isAuthen:", isAuthen);
 
     }
-    const logout = () => {
-        setIsAuthen(false);
+    const logOut = () => {
+        setIsAuthenticated(false);
 
+    }
+
+    const signUp = async ({ name, email, password }: AccountReq) => {
+        await execute('post', 'users', '', { name, email, password })
+        setStatus(true)
     }
 
     const value: UserContext = {
-        isAuthen,
+        isAuthenticated,
         login,
-        logout,
+        logOut,
+        signUp,
         data
     }
 

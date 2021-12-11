@@ -4,15 +4,14 @@ import { useStore } from '../context/user'
 
 
 function Users() {
-    const userInfor = useStore()
+    const userInfos = useStore()
 
-    if (!userInfor.isAuthen)
+    if (!userInfos.isAuthenticated)
         return <Navigate to={"/"} />
 
     return (
         <div>
-            <form action=""></form>
-            <h2 style={{ textAlign: 'center' }}>Welcome: {userInfor.data.name}</h2>
+            <h3 style={{ textAlign: 'center' }}>Welcome: {userInfos.data.name}</h3>
         </div>
     )
 }

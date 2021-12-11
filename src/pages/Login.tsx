@@ -1,7 +1,6 @@
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useRoutes } from "react-router-dom";
 import { useStore } from "../context/user";
-import { useAxios } from "../hooks/useAxios";
 
 interface LoginReq {
     id?: string;
@@ -15,14 +14,12 @@ const Login: React.FC = ({ }) => {
     const [password, setPassword] = useState('');
     const actions = useStore()
     const navigate = useNavigate()
-    // const { excute, data, error, setData } = useAxios<LoginReq>();
-
-    const handleSubmit = () => {
-        actions.login({email, password})
-        navigate("/user", {replace: true})
+    
+    const handleSubmit = async () => {
+        await actions.login({ email, password })
+        navigate("/user", { replace: true })
     }
-    // console.log('Error: ', error);
-    // console.log('Data:', actions.data);
+
 
     return (
         <div>
@@ -60,7 +57,8 @@ const Login: React.FC = ({ }) => {
                 className="btn btn-warning btn-block btnLogin">Submit
             </button>
             <p className="forgot-password text-right">
-                Do not have an account? <a href="#">SignUp Now</a>
+                Do not have an account? <Link to="/signup">SignUp Now</Link>
+                
             </p>
 
         </div>
