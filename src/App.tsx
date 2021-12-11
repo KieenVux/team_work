@@ -1,15 +1,13 @@
 import { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { useRoutes } from "react-router-dom";
+import { routeObject } from "./routes/route.map";
 
 function App() {
-  const [count, setCount] = useState(0);
   // this is tien branch
-  return (
-    <div className="App">
-      <h1>Buồi tao dài 20cm</h1>
-    </div>
-  );
+  const element = useRoutes(routeObject);
+  return <div className="App">{element}</div>;
 }
 
 export default App;
