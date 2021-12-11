@@ -7,10 +7,8 @@ function App() {
   // this is tien branch
   return (
     <div className="App">
-        <h1>Hello world</h1>
-        <h1>Hello world</h1>
-        <h1>Hello world</h1>
-        <h1>Hello world</h1>
+      <h1>Buồi tao dài 30cm</h1>
+    </div>
   );
 }
 
