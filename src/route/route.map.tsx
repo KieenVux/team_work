@@ -1,7 +1,9 @@
 import { RouteObject } from "react-router-dom";
 import { Dynamic } from "../components/RouteDynamic";
-import Home from "../pages/Home";
+//đặt tên sai nên qua đây đặt lại, rename bị 
+import UserAction from "../pages/UserAction";
 import Login from "../pages/Login";
+import Home from "../pages/newHome";
 import NotFound from "../pages/NotFound";
 import SignUp from "../pages/SignUp";
 import Users from "../pages/Users";
@@ -9,7 +11,11 @@ import Users from "../pages/Users";
 export const route: RouteObject[] = [
     {
         path: "/",
-        element: <Home />,
+        element: <UserAction />
+    },
+    {
+        path: "/userAction",
+        element: <UserAction />,
         children: [
             // {
             //     path: "/:id",
@@ -33,4 +39,8 @@ export const route: RouteObject[] = [
         path: "/user",
         element: <Users />,
     }
+]
+
+export const route2: RouteObject[] = [
+    
 ]

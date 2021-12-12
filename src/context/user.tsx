@@ -5,8 +5,8 @@ interface UserContext {
     isAuthenticated: boolean;
     login: (AccountReq: AccountReq) => Promise<void>;
     logOut: () => void;
-    signUp: (AccountReq: AccountReq) => Promise<void>;
-    data: AccountReq
+    signUp: (AccountReq: AccountReq) => Promise<boolean>;
+    data: AccountReq;
 }
 
 interface AccountReq {
@@ -26,7 +26,7 @@ const UserContext = createContext<UserContext>(null!)
 export const UserProvider: React.FC = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [status, setStatus] = useState(false)
-    const { execute, data } = useAxios<AccountReq>();
+    const { execute, data, loading } = useAxios<AccountReq>();
 
 
     const login = async ({ email, password }: AccountReq) => {
@@ -43,7 +43,14 @@ export const UserProvider: React.FC = ({ children }) => {
 
     const signUp = async ({ name, email, password }: AccountReq) => {
         await execute('post', 'users', '', { name, email, password })
-        setStatus(true)
+        let status = false;
+
+        //Validation hard code
+        if( email.length > 0 || password.length > 0) {
+            status = true;
+        }
+
+        return status
     }
 
     const value: UserContext = {

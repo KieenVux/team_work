@@ -12,21 +12,29 @@ function SignUp() {
     const actions = useStore()
     const navigate = useNavigate()
 
-    const handleSignUp =  () => {
-        // await actions.signUp({ name, email, password })
-        // alert(`Sign Up success with status code: ${actions.data.email} & ${actions.data.name}`)
-        // if(actions.data)
 
-        // navigate("/")
-        Swal.fire(
-            'Success!',
-            'Click to continue!',
-            'success'
-          )
+
+    const handleSignUp = async () => {
+        const status = await actions.signUp({ name, email, password })           
+        if (status) {
+            Swal.fire(
+                `Account has been created`,
+                'Login Now',
+                'success'
+            ).then(() => navigate("/login"))
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            })
+        }
+        
     }
 
+
     return (
-        <div className="123">
+        <div>
             <h3>Sign Up</h3>
 
             <div className="form-group">
