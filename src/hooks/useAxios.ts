@@ -9,7 +9,7 @@ const instance = axios.create({ baseURL: FAKE_API });
 type Controller = {
     //FAKE_API
     users: string;
-    todos: string;
+    toDos: string;
     posts: string;
 
     //API_PROJECT
