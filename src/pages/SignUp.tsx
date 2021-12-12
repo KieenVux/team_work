@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { useStore } from '../context/user'
+import 'sweetalert2/src/sweetalert2.scss'
+
 
 function SignUp() {
     const [name, setName] = useState('')
@@ -9,15 +12,21 @@ function SignUp() {
     const actions = useStore()
     const navigate = useNavigate()
 
-    const handleSignUp = async () => {
-        await actions.signUp({ name, email, password })
-        alert(`Sign Up success with status code: ${actions.data.email} & ${actions.data.name}`)
-        navigate("/")
-        // console.log("data: ", actions.data);
+    const handleSignUp =  () => {
+        // await actions.signUp({ name, email, password })
+        // alert(`Sign Up success with status code: ${actions.data.email} & ${actions.data.name}`)
+        // if(actions.data)
+
+        // navigate("/")
+        Swal.fire(
+            'Success!',
+            'Click to continue!',
+            'success'
+          )
     }
 
     return (
-        <div>
+        <div className="123">
             <h3>Sign Up</h3>
 
             <div className="form-group">
