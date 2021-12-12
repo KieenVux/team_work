@@ -4,7 +4,6 @@ import { routeObject } from "./routes/route.map";
 
 function App() {
   // this is tien branch
-  console.log("no console log")
   const element = useRoutes(routeObject);
   return <div className="App">{element}</div>;
 }
