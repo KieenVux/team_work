@@ -23,9 +23,8 @@ export const HomePage = () => {
                 <h1>Another function</h1>
                 <button onClick={() => negative("/login")}>Login</button>
                 <button onClick={() => negative("/signUp")}>Sign Up</button>
+                <button onClick={() => negative("/update")}>Update Profile</button>
             </div>
-            <Outlet />
         </div>
-
     )
 }

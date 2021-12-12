@@ -34,6 +34,7 @@ export const UserProvider: React.FC = ({ children }) => {
     const { execute, data } = useAxios<AccountRequest>();
 
     const login = async ({ email, password }: AccountRequest) => {
+        const users = await [execute("get", "users")]
         if (email === 'kietna@123' && password === '123') {
             await execute('get', 'users', '/1')
             setIsAuthenticated(true);
