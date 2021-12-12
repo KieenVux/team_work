@@ -5,14 +5,14 @@ import { useCRUD } from '../hooks/useCRUD.api';
 import { Loading } from '../features/loading';
 import { LoginPage } from './loginPage';
 export const HomePage = () => {
-    const { data, error, loading, execute } = useAxios<IUser>();
+    const { data, loading } = useAxios<IUser>();
     const { createUser, deleteUser, getAllUsers, updateUser } = useCRUD();
     const negative = useNavigate();
     return (
         <div>
             <h1>Home Page</h1>
             <div>
-                {loading && !data ? <Loading /> : <h2>Check console to see your data</h2>}
+                {!loading && data ? < Loading /> : <h2>Check console to see your data</h2>}
                 <button onClick={getAllUsers}>Show all users</button>
                 <button onClick={createUser}>Create a user</button>
                 <button onClick={updateUser}>Update a user</button>

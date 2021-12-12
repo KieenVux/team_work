@@ -3,6 +3,7 @@ import { HomePage } from "../screens/homePage";
 import { LoginPage } from "../screens/loginPage";
 import { NotFoundPage } from "../screens/notFoundPage";
 import { SignUpPage } from "../screens/signUpPage";
+import { UserPage } from "../screens/userPage";
 
 export const route: RouteObject[] = [
     {
@@ -23,8 +24,8 @@ export const route: RouteObject[] = [
         path: "/*",
         element: <NotFoundPage />
     },
-    // {
-    //     path: "/user",
-    //     element: <UserPage />,
-    // }
+    {
+        path: "/user",
+        element: <UserPage />,
+    }
 ]

@@ -5,7 +5,8 @@ import { useAxios } from "../hooks/useAxios";
 interface UserContext {
     isAuthenticated: boolean;
     login: (AccountReq: AccountRequest) => Promise<void>;
-    data: AccountRequest
+    logout: () => void;
+    data: AccountRequest;
 }
 
 //type of data in Api
@@ -33,15 +34,20 @@ export const UserProvider: React.FC = ({ children }) => {
 
 
     const login = async ({ email, password }: AccountRequest) => {
-        if (email === 'Sincere@april.biz' && password === '123') {
+        if (email === 'kietna@123' && password === '123') {
             await execute('get', 'users', '/1')
             setIsAuthenticated(true);
         }
     }
 
+    const logout = async () => {
+        setIsAuthenticated(false)
+    }
+
     const value: UserContext = {
         isAuthenticated,
         login,
+        logout,
         data
     }
 
