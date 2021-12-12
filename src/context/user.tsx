@@ -1,7 +1,6 @@
 import { createContext, FC, useState } from "react";
-import { ResponseObject } from "../common/reponse.object";
-import { instance } from "../common/axios";
 import { Cookies } from "react-cookie";
+import { instance } from "../common/axios";
 
 export interface User {
   __id: string;
@@ -38,7 +37,6 @@ export const UserProvider: FC = ({ children }) => {
       password,
     });
     const data: Partial<User> = response.data;
-    console.log(data);
     if (data == null || data == undefined) return;
     setUser(data);
     callback(data.role?.includes("admin") ? "/" : "/account");
@@ -47,7 +45,7 @@ export const UserProvider: FC = ({ children }) => {
   const logout = () => {
     setUser(null!);
     const cookie = new Cookies();
-    cookie.remove("auth-token")
+    cookie.remove("auth-token");
   };
 
   const value: UserContextType = {
