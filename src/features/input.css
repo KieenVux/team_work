@@ -26,6 +26,10 @@
     border: 1px solid #6a5af9;
     border-radius: 4px;
 }
+.btn-register {
+    display: flex;
+    padding-left: 15px;
+}
 .form-group {
     display: flex;
     align-items: center;
@@ -39,4 +43,5 @@
     color: #6a5af9;
     font-size: 14px;
     border-radius: 4px;
+    cursor: pointer;
 }

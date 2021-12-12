@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { ChangeEvent, createContext, useContext, useState } from "react";
 import { useAxios } from "../hooks/useAxios";
 
 //initial UserContext
@@ -6,6 +6,7 @@ interface UserContext {
     isAuthenticated: boolean;
     login: (AccountReq: AccountRequest) => Promise<void>;
     logout: () => void;
+    register: (AccountReq: AccountRequest) => Promise<boolean>;
     data: AccountRequest;
 }
 
@@ -32,7 +33,6 @@ export const UserProvider: React.FC = ({ children }) => {
     const [status, setStatus] = useState(false)
     const { execute, data } = useAxios<AccountRequest>();
 
-
     const login = async ({ email, password }: AccountRequest) => {
         if (email === 'kietna@123' && password === '123') {
             await execute('get', 'users', '/1')
@@ -44,15 +44,25 @@ export const UserProvider: React.FC = ({ children }) => {
         setIsAuthenticated(false)
     }
 
+    const register = async ({ email, password, name }: AccountRequest) => {
+        await execute("get", "users", "/1");
+        let status = false;
+        await execute("post", "users", "", { email, password, name })
+        if (email.length > 0 && password.length > 0) {
+            status = true;
+        }
+        return status;
+    }
+
     const value: UserContext = {
         isAuthenticated,
         login,
         logout,
+        register,
         data
     }
 
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>
-
 }
 
 export const useStore = () => useContext(UserContext)

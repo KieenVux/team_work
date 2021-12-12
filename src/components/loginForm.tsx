@@ -10,7 +10,6 @@ export const LoginForm = () => {
     const handleLoginSubmit = async () => {
         await action.login({ email, password })
         setTimeout(() => navigate("/user", { replace: true }), 3000)
-        console.log(action.data)
     }
     return (
         <div>

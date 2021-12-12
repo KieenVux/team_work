@@ -46,7 +46,6 @@ export const useAxios = <Type>() => {
                 setData(item.data);
                 setLoading(false);
             }
-
             if (method === "post" || method === "patch") {
                 const item = await instance[method](
                     controller + prefix,
