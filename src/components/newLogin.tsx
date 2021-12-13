@@ -5,6 +5,10 @@ import '../Style/loginForm.css'
 import { useStore } from '../context/user';
 import { useNavigate } from 'react-router-dom';
 
+interface Props {
+
+}
+
 const newLogin: React.FC = ({ }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -14,7 +18,7 @@ const newLogin: React.FC = ({ }) => {
 
     const onFinish = async () => {
         await actions.login({ email, password })
-        setTimeout(() => navigate("/", { replace: true }), 1500)
+        setTimeout(() => navigate("/", { replace: true }), 1200)
     };
 
     return (
