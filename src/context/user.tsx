@@ -7,6 +7,7 @@ interface UserContext {
     login: (AccountReq: AccountRequest) => Promise<void>;
     logout: () => void;
     register: (AccountReq: AccountRequest) => Promise<boolean>;
+    update: (AccountReq: AccountRequest) => Promise<boolean>;
     data: AccountRequest;
 }
 
@@ -55,11 +56,21 @@ export const UserProvider: React.FC = ({ children }) => {
         return status;
     }
 
+    const update = async ({ email, password, name }: AccountRequest) => {
+        setStatus: false
+        if (email.length === 0 && password.length === 0) {
+            await execute("patch", "users", "/1", { email, password, name });
+            setStatus: true
+        }
+        return status;
+    }
+
     const value: UserContext = {
         isAuthenticated,
         login,
         logout,
         register,
+        update,
         data
     }
 

@@ -8,12 +8,27 @@ export const UpdateForm = () => {
     const [name, setName] = useState('');
     const action = useStore();
     const navigate = useNavigate();
+
+    const handleUpdateSubmit = async () => {
+        const updateData = await action.update({ email, password, name });
+        if (updateData) {
+            navigate("/update", { replace: true })
+            setEmail('');
+            setPassword('')
+            setName('')
+            alert("Cannot update this profile!!!")
+        } else {
+            navigate("/", { replace: true })
+            await alert("Update " + `${action.data.name}` + " successfully!")
+        }
+    }
+
     return (
         <div>
             <h1>Update Profile</h1>
             <div className='form-group'>
                 <div className='text-field'>
-                    <label>Email</label>
+                    <label>New Email</label>
                     <input
                         onChange={e => setEmail(e.target.value)}
                         type='email'
@@ -23,7 +38,7 @@ export const UpdateForm = () => {
             </div >
             <div className='form-group'>
                 <div className='text-field'>
-                    <label>Name</label>
+                    <label>New Name</label>
                     <input
                         onChange={e => setName(e.target.value)}
                         type='text'
@@ -33,7 +48,7 @@ export const UpdateForm = () => {
             </div >
             <div className='form-group'>
                 <div className='text-field'>
-                    <label>Password</label>
+                    <label>New Password</label>
                     <input
                         onChange={e => setPassword(e.target.value)}
                         type='password'
@@ -43,7 +58,7 @@ export const UpdateForm = () => {
             </div >
             <div className='form-group'>
                 <div className='btn-register'>
-                    <button>Register</button>
+                    <button onClick={handleUpdateSubmit}>Update</button>
                 </div>
                 <div className='btn-register'>
                     <button onClick={() => {

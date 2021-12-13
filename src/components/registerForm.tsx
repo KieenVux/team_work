@@ -15,6 +15,7 @@ export const RegisterForm = () => {
             setEmail('');
             setPassword('')
             setName('')
+            alert("Cannot create!!!");
         } else {
             navigate("/", { replace: true })
             alert("Create " + `${action.data.name}` + " successfully!")
