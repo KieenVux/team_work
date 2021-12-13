@@ -1,7 +1,5 @@
-import React from 'react'
 import '../Style/Home.css'
 import { Layout, Menu, Breadcrumb, Row, Col } from 'antd';
-import NewLoginForm from '../pages/newLogin';
 import { useNavigate } from 'react-router-dom';
 
 function newHome() {
@@ -18,7 +16,7 @@ function newHome() {
                     </Col>
                     <Col span={18} >
                         <Menu style={{ display: 'flex', flexDirection: 'row-reverse' }} theme="dark" mode="horizontal">
-                            <Menu.Item onClick={() => navigate("/login")} key={1}>{`Login`}</Menu.Item>
+                            <Menu.Item onClick={() => navigate("/userAction")} key={1}>{`Login`}</Menu.Item>
                             <Menu.Item key={2}>{`Sign Up`}</Menu.Item>
                         </Menu>
                     </Col>
