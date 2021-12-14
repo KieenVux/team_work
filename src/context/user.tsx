@@ -3,8 +3,10 @@ import { useAxios } from "../hooks/useAxios";
 
 interface UserContext {
     isAuthenticated: boolean;
+    // eslint-disable-next-line no-unused-vars
     login: (AccountReq: AccountReq) => Promise<void>;
     logOut: () => void;
+    // eslint-disable-next-line no-unused-vars
     signUp: (AccountReq: AccountReq) => Promise<boolean>;
     data: AccountReq;
 }
@@ -23,10 +25,10 @@ interface AccountReq {
 
 const UserContext = createContext<UserContext>(null!)
 
+// eslint-disable-next-line react/prop-types
 export const UserProvider: React.FC = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const [status, setStatus] = useState(false)
-    const { execute, data, loading } = useAxios<AccountReq>();
+    const { execute, data } = useAxios<AccountReq>();
 
 
     const login = async ({ email, password }: AccountReq) => {

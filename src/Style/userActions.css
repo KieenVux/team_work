@@ -3,7 +3,11 @@
     padding: 95px !important;
 }
 
+.ant-tabs-nav-list span {
+    font-size: 20px;
+}
 
-/* .ant-page-header-heading {
-    background: red;
-} */
+.ant-tabs-nav .ant-tabs-tab {
+    width: 200px;
+    justify-content: center;
+}

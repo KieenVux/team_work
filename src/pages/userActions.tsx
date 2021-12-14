@@ -26,14 +26,14 @@ function userActions() {
     const tabLogin = (
         <span>
             <LoginOutlined />
-            Login
+            Sign In
         </span>
     )
     const [tab, setTab] = useState('1')
 
     const switchTab = (key: string) => {
         setTab(key)
-    }   
+    }
 
     return (
         <div>
@@ -45,13 +45,12 @@ function userActions() {
                         title="Home"
                         subTitle="This is a subtitle"
                         footer={
-                            <Tabs activeKey={tab} onChange={switchTab} size="large" defaultActiveKey={tab} >
+                            <Tabs activeKey={tab} onChange={switchTab} size="large" defaultActiveKey={tab} centered >
                                 <TabPane tab={tabLogin} key='1'>
                                     <div className="site-layout-content">
                                         {!data.isAuthenticated ? <NewLoginForm switchTab={switchTab} /> : <SkeletonLogin />}
                                     </div>
                                 </TabPane>
-
                                 <TabPane tab={tabRegister} key='2'>
                                     <div className="site-layout-content">
                                         <NewSignUp switchTab={switchTab} />

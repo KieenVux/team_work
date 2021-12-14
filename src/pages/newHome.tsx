@@ -1,11 +1,36 @@
 import '../Style/Home.css'
-import { Layout, Menu, Breadcrumb, Row, Col } from 'antd';
+import '../Style/Header.css'
+
+import { Layout, Menu, Breadcrumb, Row, Col, Avatar, Dropdown } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { UserOutlined, EditOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
+import { useStore } from '../context/user';
+
 
 function newHome() {
     const { Header, Content, Footer } = Layout;
 
+    const userInfos = useStore()
+
     const navigate = useNavigate();
+
+    const menu = (
+        <Menu >
+            <div className="dropdown-menu-user">
+                <Menu.Item>
+                    <span><EditOutlined /> Edit profile</span>
+                </Menu.Item >
+                <Menu.Item>
+                    <span><SettingOutlined /> Settings</span>
+                </Menu.Item>
+                <Menu.Divider></Menu.Divider>
+                <Menu.Item>
+                    <span><LogoutOutlined /> LogOut</span>
+                </Menu.Item>
+            </div>
+        </Menu>
+    );
+
 
     return (
         <Layout className="layout">
@@ -16,8 +41,22 @@ function newHome() {
                     </Col>
                     <Col span={18} >
                         <Menu style={{ display: 'flex', flexDirection: 'row-reverse' }} theme="dark" mode="horizontal">
-                            <Menu.Item onClick={() => navigate("/userAction")} key={1}>{`Login`}</Menu.Item>
-                            <Menu.Item key={2}>{`Sign Up`}</Menu.Item>
+                                {userInfos.data ?
+                                    <Dropdown overlay={menu} placement="bottomLeft">
+                                        <Menu.Item key={1}>
+                                            <Avatar
+                                                style={{
+                                                    backgroundColor: '#87d068',
+                                                }}
+                                                icon={<UserOutlined />}
+                                            />
+                                            <span> {userInfos.data.name} </span>
+                                        </Menu.Item>
+                                    </Dropdown> :
+                                    <Menu.Item
+                                        onClick={() => navigate("/userAction")}
+                                        key={2}> <span>Sign In</span>
+                                    </Menu.Item>}
                         </Menu>
                     </Col>
                 </Row>
@@ -42,7 +81,6 @@ function newHome() {
                     <span>Content</span>
                     <h1>HOME </h1>
                     <span>Content</span>
-                    {/* <NewLoginForm /> */}
                 </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
