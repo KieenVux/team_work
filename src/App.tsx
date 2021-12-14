@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       {element}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
