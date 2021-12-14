@@ -6,15 +6,14 @@ import { useStore } from '../context/user';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
-
+    switchTab: (key: string) => void;
 }
 
-const newLogin: React.FC = ({ }) => {
+const newLogin: React.FC<Props> = ({ switchTab }: Props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate()
     const actions = useStore()
-
 
     const onFinish = async () => {
         await actions.login({ email, password })
@@ -78,7 +77,7 @@ const newLogin: React.FC = ({ }) => {
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    Or <a >register now!</a>
+                    Or <a onClick={() => switchTab('2')} >register now!</a>
                 </Form.Item>
             </Form>
         </div>

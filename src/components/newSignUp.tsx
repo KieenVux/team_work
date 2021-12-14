@@ -39,7 +39,12 @@ const tailFormItemLayout = {
     },
 };
 
-const newSignUp: React.FC = ({ }) => {
+
+interface Props {
+    switchTab: (key: string) => void;
+}
+
+const newSignUp: React.FC<Props> = ({ switchTab }: Props) => {
     const [form] = Form.useForm();
 
     const [name, setName] = useState('')
@@ -55,7 +60,7 @@ const newSignUp: React.FC = ({ }) => {
                 `Account has been created`,
                 'Login Now',
                 'success'
-            ).then(() => navigate("/"))
+            ).then(() => switchTab('1'))
         } else {
             Swal.fire({
                 icon: 'error',
@@ -71,6 +76,7 @@ const newSignUp: React.FC = ({ }) => {
             <h2>Sign Up</h2>
             <Form
                 {...formItemLayout}
+                style={{ width: '40%'}}
                 form={form}
                 name="register"
                 onFinish={onFinish}
@@ -184,7 +190,7 @@ const newSignUp: React.FC = ({ }) => {
                     </Button>
                 </Form.Item>
             </Form>
-        </div>
+        </div >
     )
 }
 

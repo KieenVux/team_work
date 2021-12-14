@@ -8,6 +8,7 @@ import NewLoginForm from '../components/newLogin';
 import '../Style/userActions.css'
 import SkeletonLogin from '../skeleton/skeletonLogin';
 import { useStore } from '../context/user';
+import { useState } from 'react';
 
 function userActions() {
     const { Content, Footer } = Layout;
@@ -28,14 +29,11 @@ function userActions() {
             Login
         </span>
     )
-    
-    let tabIndex = '1'
-    const switchTab = (index: string) => {
-        if(index === '1')
-            tabIndex === '2'
-        else
-            tabIndex === '1'
-    }
+    const [tab, setTab] = useState('1')
+
+    const switchTab = (key: string) => {
+        setTab(key)
+    }   
 
     return (
         <div>
@@ -47,16 +45,16 @@ function userActions() {
                         title="Home"
                         subTitle="This is a subtitle"
                         footer={
-                            <Tabs size="large" defaultActiveKey={tabIndex} >
-                                <TabPane tab={tabLogin} key="1">
+                            <Tabs activeKey={tab} onChange={switchTab} size="large" defaultActiveKey={tab} >
+                                <TabPane tab={tabLogin} key='1'>
                                     <div className="site-layout-content">
-                                        {!data.isAuthenticated ? <NewLoginForm /> : <SkeletonLogin />}
+                                        {!data.isAuthenticated ? <NewLoginForm switchTab={switchTab} /> : <SkeletonLogin />}
                                     </div>
                                 </TabPane>
 
-                                <TabPane tab={tabRegister} key="2">
+                                <TabPane tab={tabRegister} key='2'>
                                     <div className="site-layout-content">
-                                        <NewSignUp />
+                                        <NewSignUp switchTab={switchTab} />
                                     </div>
                                 </TabPane>
                             </Tabs>
