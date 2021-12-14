@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { Layout, PageHeader, Tabs } from 'antd';
-import { UserOutlined, HomeOutlined, LoginOutlined } from '@ant-design/icons';
+import { UserOutlined, LoginOutlined } from '@ant-design/icons';
 
 import NewSignUp from "../components/newSignUp";
 import NewLoginForm from '../components/newLogin';

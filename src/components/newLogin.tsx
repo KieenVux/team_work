@@ -1,11 +1,12 @@
-import React, { ChangeEvent, useState } from 'react'
-import { Form, Input, Button, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import '../Style/loginForm.css'
-import { useStore } from '../context/user';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Checkbox, Form, Input } from 'antd';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useStore } from '../context/user';
+import '../Style/loginForm.css';
 
 interface Props {
+    // eslint-disable-next-line no-unused-vars
     switchTab: (key: string) => void;
 }
 

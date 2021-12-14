@@ -5,7 +5,6 @@ import { Form, Input, Checkbox, Button, } from 'antd';
 import '../Style/signUpForm.css'
 import 'sweetalert2/src/sweetalert2.scss'
 
-import { useNavigate } from 'react-router-dom';
 import { useStore } from '../context/user';
 
 const formItemLayout = {
@@ -41,6 +40,7 @@ const tailFormItemLayout = {
 
 
 interface Props {
+    // eslint-disable-next-line no-unused-vars
     switchTab: (key: string) => void;
 }
 
@@ -51,7 +51,7 @@ const newSignUp: React.FC<Props> = ({ switchTab }: Props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const actions = useStore()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const onFinish = async () => {
         const status = await actions.signUp({ name, email, password })
