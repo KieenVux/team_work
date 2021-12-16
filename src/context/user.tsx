@@ -8,7 +8,11 @@ interface UserContext {
     logOut: () => void;
     // eslint-disable-next-line no-unused-vars
     signUp: (AccountReq: AccountReq) => Promise<boolean>;
-    data: AccountReq;
+    getUsers: () => Promise<void>;
+    loading: boolean;
+    data: AccountReq[];    
+
+    users: AccountReq[];
 }
 
 interface AccountReq {
@@ -22,13 +26,14 @@ interface AccountReq {
 }
 
 
-
 const UserContext = createContext<UserContext>(null!)
 
 // eslint-disable-next-line react/prop-types
 export const UserProvider: React.FC = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const { execute, data } = useAxios<AccountReq>();
+    const { execute, data, loading } = useAxios<AccountReq[]>();
+
+    const [users, setUsers] = useState<AccountReq[]>(null!)
 
 
     const login = async ({ email, password }: AccountReq) => {
@@ -43,8 +48,9 @@ export const UserProvider: React.FC = ({ children }) => {
 
     }
 
+    // eslint-disable-next-line no-unused-vars
     const signUp = async ({ name, email, password }: AccountReq) => {
-        await execute('post', 'users', '', { name, email, password })
+        // await execute('post', 'users', '', { name, email, password })
         let status = false;
 
         //Validation hard code
@@ -55,12 +61,21 @@ export const UserProvider: React.FC = ({ children }) => {
         return status
     }
 
+    const getUsers = async () => {
+        await execute('get', 'users')
+        setUsers(data)
+    }
+    
+
     const value: UserContext = {
         isAuthenticated,
+        users,
         login,
         logOut,
+        getUsers,
         signUp,
-        data
+        loading,
+        data,
     }
 
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>

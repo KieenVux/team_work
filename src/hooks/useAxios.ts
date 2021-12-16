@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 
-const API_PROJECT = "http://14.225.254.71:8080/api/v1"
+// const API_PROJECT = "http://14.225.254.71:8080/api/v1"
 const FAKE_API = "https://jsonplaceholder.typicode.com/"
 
 const instance = axios.create({ baseURL: FAKE_API })
@@ -30,8 +30,9 @@ type MethodCall = {
 }
 
 export const useAxios = <Type>() => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState<unknown>(null);
+    
     const [data, setData] = useState<Type>(null!);
 
     const execute = async (

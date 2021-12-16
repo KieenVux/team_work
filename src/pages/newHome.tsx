@@ -14,6 +14,8 @@ function newHome() {
 
     const navigate = useNavigate();
 
+
+
     const menu = (
         <Menu >
             <div className="dropdown-menu-user">
@@ -30,8 +32,7 @@ function newHome() {
             </div>
         </Menu>
     );
-
-
+    
     return (
         <Layout className="layout">
             <Header>
@@ -41,22 +42,24 @@ function newHome() {
                     </Col>
                     <Col span={18} >
                         <Menu style={{ display: 'flex', flexDirection: 'row-reverse' }} theme="dark" mode="horizontal">
-                                {userInfos.data ?
-                                    <Dropdown overlay={menu} placement="bottomLeft">
-                                        <Menu.Item key={1}>
-                                            <Avatar
-                                                style={{
-                                                    backgroundColor: '#87d068',
-                                                }}
-                                                icon={<UserOutlined />}
-                                            />
-                                            <span> {userInfos.data.name} </span>
-                                        </Menu.Item>
-                                    </Dropdown> :
-                                    <Menu.Item
-                                        onClick={() => navigate("/userAction")}
-                                        key={2}> <span>Sign In</span>
-                                    </Menu.Item>}
+                            {userInfos.isAuthenticated === true ?
+                               
+                                <Dropdown overlay={menu} placement="bottomLeft">
+                                    <Menu.Item key={1}>
+                                        {console.log(userInfos.data)}
+                                        <Avatar
+                                            style={{
+                                                backgroundColor: '#87d068',
+                                            }}
+                                            icon={<UserOutlined />}
+                                        />
+                                        {/* <span> {userInfos.data.name} </span> */}
+                                    </Menu.Item>
+                                </Dropdown> :
+                                <Menu.Item
+                                    onClick={() => navigate("/userAction")}
+                                    key={2}> <span>Sign In</span>
+                                </Menu.Item>}
                         </Menu>
                     </Col>
                 </Row>
@@ -71,16 +74,10 @@ function newHome() {
                 <div className="site-layout-content">
                     <h1>HOME </h1>
                     <span>Content</span>
-                    <h1>HOME </h1>
-                    <span>Content</span>
-                    <h1>HOME </h1>
-                    <span>Content</span>
-                    <h1>HOME </h1>
-                    <span>Content</span>
-                    <h1>HOME </h1>
-                    <span>Content</span>
-                    <h1>HOME </h1>
-                    <span>Content</span>
+                    <button onClick={() => userInfos.getUsers()}>Click</button>
+                    <ul>
+                        {(userInfos.data !== null) && userInfos.data.map((user, index) => <li key={index}>{user.name}</li>)}
+                    </ul>
                 </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
