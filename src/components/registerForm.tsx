@@ -1,26 +1,18 @@
-import React, { ChangeEventHandler, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../context/user';
 
 export const RegisterForm = () => {
+    // eslint-disable-next-line no-unused-vars
     const [email, setEmail] = useState('');
+    // eslint-disable-next-line no-unused-vars
     const [password, setPassword] = useState('');
+    // eslint-disable-next-line no-unused-vars
     const [name, setName] = useState('');
     const action = useStore();
     const navigate = useNavigate();
     const handleRegisterSubmit = async () => {
-        const status = await action.register({ email, password, name });
-        if (status) {
-            navigate("/signUp", { replace: true })
-            setEmail('');
-            setPassword('')
-            setName('')
-            alert("Cannot create!!!");
-        } else {
-            navigate("/", { replace: true })
-            alert("Create " + `${action.data.name}` + " successfully!")
-        }
-        // console.log(action.data.email + " 123")
+        // await action.register({ email, password, name });
     }
     return (
         <div>

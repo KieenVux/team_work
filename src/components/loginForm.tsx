@@ -1,16 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../context/user';
-import './../features/input.css'
+import './../features/input.css';
+
 export const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const action = useStore();
+
     const handleLoginSubmit = async () => {
-        await action.login({ email, password })
-        setTimeout(() => navigate("/user", { replace: true }), 3000)
+        await action.login({ email, password });
+        setTimeout(() => navigate("/user", { replace: true }), 1000);
     }
+
     return (
         <div>
             <h1>Login</h1>
@@ -33,7 +36,7 @@ export const LoginForm = () => {
                         placeholder='Enter your password'>
                     </input>
                 </div>
-            </div >
+            </div>
             <div className='form-group'>
                 <button onClick={handleLoginSubmit}>Login</button>
             </div>
