@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useAxios } from "../hooks/useAxios";
+import { FetchState } from "../reducers/FetchStatusReducer";
+
 
 interface UserContext {
     isAuthenticated: boolean;
@@ -9,10 +11,9 @@ interface UserContext {
     // eslint-disable-next-line no-unused-vars
     signUp: (AccountReq: AccountReq) => Promise<boolean>;
     getUsers: () => Promise<void>;
-    loading: boolean;
-    data: AccountReq[];    
+    isLoading: boolean;
+    fetchApiData: FetchState;    
 
-    users: AccountReq[];
 }
 
 interface AccountReq {
@@ -31,26 +32,30 @@ const UserContext = createContext<UserContext>(null!)
 // eslint-disable-next-line react/prop-types
 export const UserProvider: React.FC = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const { execute, data, loading } = useAxios<AccountReq[]>();
+    const { execute, fetchApiData, isLoading, error } = useAxios<AccountReq>();
+    // const [data, setData] = useState()
+    // const [data, setData] = useState()
 
-    const [users, setUsers] = useState<AccountReq[]>(null!)
 
 
     const login = async ({ email, password }: AccountReq) => {
+        // const { execute, data, loading } = useAxios<AccountReq>();
+
         if (email === 'Sincere@april.biz' && password === '123') {
             await execute('get', 'users', '/1')
-            setIsAuthenticated(true);
+            setIsAuthenticated(true); 
+        } else {
+            await execute('get', 'users', '/hgjdkfhgj')
         }
 
     }
-    const logOut = () => {
-        setIsAuthenticated(false);
-
-    }
+    const logOut = () => setIsAuthenticated(false);
+    
 
     // eslint-disable-next-line no-unused-vars
-    const signUp = async ({ name, email, password }: AccountReq) => {
-        // await execute('post', 'users', '', { name, email, password })
+    const signUp = async ({name, email, password }: AccountReq) => {
+        // const { execute, data, loading } = useAxios<AccountReq>();
+        await execute('post', 'users', '', {} ,{ name, email, password })
         let status = false;
 
         //Validation hard code
@@ -62,20 +67,21 @@ export const UserProvider: React.FC = ({ children }) => {
     }
 
     const getUsers = async () => {
+        // const { execute, data, loading } = useAxios<AccountReq>();
+        // setData(data);
         await execute('get', 'users')
-        setUsers(data)
+        // setUsers(data)
     }
     
 
     const value: UserContext = {
         isAuthenticated,
-        users,
         login,
         logOut,
         getUsers,
         signUp,
-        loading,
-        data,
+        fetchApiData,
+        isLoading
     }
 
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>

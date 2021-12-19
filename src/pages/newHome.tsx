@@ -2,7 +2,7 @@ import '../Style/Home.css'
 import '../Style/Header.css'
 
 import { Layout, Menu, Breadcrumb, Row, Col, Avatar, Dropdown } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { UserOutlined, EditOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useStore } from '../context/user';
 
@@ -14,7 +14,10 @@ function newHome() {
 
     const navigate = useNavigate();
 
-
+    const handleLogout = () => {
+        userInfos.logOut()
+        navigate("/")
+    }
 
     const menu = (
         <Menu >
@@ -26,13 +29,13 @@ function newHome() {
                     <span><SettingOutlined /> Settings</span>
                 </Menu.Item>
                 <Menu.Divider></Menu.Divider>
-                <Menu.Item>
+                <Menu.Item onClick={() => handleLogout()}>
                     <span><LogoutOutlined /> LogOut</span>
                 </Menu.Item>
             </div>
         </Menu>
     );
-    
+
     return (
         <Layout className="layout">
             <Header>
@@ -43,17 +46,17 @@ function newHome() {
                     <Col span={18} >
                         <Menu style={{ display: 'flex', flexDirection: 'row-reverse' }} theme="dark" mode="horizontal">
                             {userInfos.isAuthenticated === true ?
-                               
+
                                 <Dropdown overlay={menu} placement="bottomLeft">
                                     <Menu.Item key={1}>
-                                        {console.log(userInfos.data)}
+
                                         <Avatar
                                             style={{
                                                 backgroundColor: '#87d068',
                                             }}
                                             icon={<UserOutlined />}
                                         />
-                                        {/* <span> {userInfos.data.name} </span> */}
+                                        <span> {userInfos.fetchApiData.data.name} </span>
                                     </Menu.Item>
                                 </Dropdown> :
                                 <Menu.Item
@@ -72,12 +75,9 @@ function newHome() {
                     <Breadcrumb.Item>App</Breadcrumb.Item>
                 </Breadcrumb>
                 <div className="site-layout-content">
-                    <h1>HOME </h1>
-                    <span>Content</span>
-                    <button onClick={() => userInfos.getUsers()}>Click</button>
-                    <ul>
-                        {(userInfos.data !== null) && userInfos.data.map((user, index) => <li key={index}>{user.name}</li>)}
-                    </ul>
+
+                    <Outlet/>
+                    
                 </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>

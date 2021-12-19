@@ -1,65 +1,42 @@
 import { RouteObject } from "react-router-dom";
-import { Dynamic } from "../components/RouteDynamic";
 
-// import UserAction from "../pages/UserAction";
 import UserActions from "../pages/userActions";
 
-
-// import Home from "../pages/newHome";
 import NewHome from "../pages/newHome";
 
-//
 import NotFound from "../pages/NotFound";
 
-// import SignUp from "../pages/SignUp";
-import NewSignUp from "../components/newSignUp";
-
-// import Users from "../pages/Users";
-
-
-// import Login from "../pages/Login";
-import NewLoginForm from '../components/newLogin';
+import AdminActions from "../components/adminActions";
 
 
 export const route: RouteObject[] = [
     {
         path: "/",
-        element: <NewHome />
-        // element: <UserAction />
+        element: <NewHome />,
+        children: [
+            {
+                path: "/adminAction",
+                element: <AdminActions />,
+            },
+            {
+                path: "/",
+                element: <div>
+                    <h1>HOME</h1>
+                    <span>Content:</span>
+                </div>,
+            },
+        ]
     },
     {
         path: "/userAction",
-        element: <UserActions />,
-        // children: [
-        //     {
-        //         path: "/userAction/login",
-        //         element: <NewLoginForm />
-        //     },
-        //     {
-        //         path: "/userAction/signup",
-        //         element: <NewSignUp />
-        //     },
-        // ]
+        element: <UserActions />
     },
-    // {
-    //     path: "/login",
-    //     element: <NewLoginForm />
-    //     // element: <Login />,
-    // },
-    // {
-    //     path: "/signup",
-    //     element: <NewSignUp />,
-    // },
     {
         path: "/*",
         element: <NotFound />
-    },
-    {
-        path: "/user",
-        // element: <NewLoginForm />,
     }
 ]
 
 export const route2: RouteObject[] = [
-    
+
 ]

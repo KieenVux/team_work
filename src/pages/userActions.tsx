@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { Layout, PageHeader, Tabs } from 'antd';
 import { UserOutlined, LoginOutlined } from '@ant-design/icons';
 
@@ -35,6 +35,10 @@ function userActions() {
         setTab(key)
     }
 
+    // if (data.isAuthenticated) {
+    //     return <Navigate to={"/"} />
+    // }
+
     return (
         <div>
             <Layout style={{ height: '100%' }} className="layout">
@@ -59,7 +63,6 @@ function userActions() {
                             </Tabs>
                         }
                     />
-
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
             </Layout>

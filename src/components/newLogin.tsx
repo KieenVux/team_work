@@ -18,8 +18,12 @@ const newLogin: React.FC<Props> = ({ switchTab }: Props) => {
 
     const onFinish = async () => {
         await actions.login({ email, password })
-        setTimeout(() => navigate("/", { replace: true }), 1200)
+        setTimeout(() => navigate("/adminAction", { replace: true }), 1200)
     };
+
+    
+
+
 
     return (
         <div className="card-login-form">
