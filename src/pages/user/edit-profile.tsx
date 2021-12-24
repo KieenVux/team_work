@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-function EditProfile() {
+export const EditProfile: React.FC = () => {
     const params = useParams()
     return (
         <div>
@@ -9,5 +9,3 @@ function EditProfile() {
         </div>
     )
 }
-
-export default EditProfile

@@ -1,7 +1,7 @@
 import React from 'react'
-import LoginForm from '../components/login_form'
+import { LoginForm } from '../components/login-form'
 
-function Login() {
+export const Login: React.FC = () => {
     return (
         <div>
             <h1>Login</h1>
@@ -9,5 +9,3 @@ function Login() {
         </div>
     )
 }
-
-export default Login
