@@ -1,20 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './index.css'
 import App from './App'
-import 'antd/dist/antd.css';
-import './Style/App.css'
 import { BrowserRouter } from 'react-router-dom'
-import { UserProvider } from './context/user'
+
 
 ReactDOM.render(
   <React.StrictMode>
-
-    <UserProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </UserProvider>
-    
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )
